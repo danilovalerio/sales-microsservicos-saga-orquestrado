@@ -89,6 +89,32 @@ services:
     depends_on:
       - "kafka"
 
+  order-service:
+    build: './order-service'
+    container_name: order-service
+    depends_on:
+      - order-db #pegar sempre pelo nome do serviço
+      - kafka
+    networks:
+      - orchestrator-saga
+    environment:
+      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - MONGO_DB_URI=mongodb://admin:123456@order-db:27017
+    ports:
+      - 3000:3000
+
+  orchestrator-service:
+    build: './orchestrator-service'
+    container_name: order-service
+    depends_on:
+      - kafka
+    networks:
+      - orchestrator-saga
+    environment:
+      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+    ports:
+      - 8080:8080
+
 networks:
   orchestrator-saga:
     driver: bridge
