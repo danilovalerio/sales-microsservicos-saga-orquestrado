@@ -15,3 +15,10 @@ spring:
     mongodb:
       database: admin
       uri: ${MONGODB_URI:mongodb://admin:123456@localhost:27017}
+
+#Configura o log desligando os loggers gerais do kafka, poderíamos deixa INFO por exemplo.
+logging:
+  level:
+    org:
+      apache:
+        kafka: OFF
