@@ -98,8 +98,8 @@ services:
     networks:
       - orchestrator-saga
     environment:
-      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
-      - MONGO_DB_URI=mongodb://admin:123456@order-db:27017
+      - KAFKA_BROKER=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - MONGODB_URI=mongodb://admin:123456@order-db:27017
     ports:
       - 3000:3000
 
