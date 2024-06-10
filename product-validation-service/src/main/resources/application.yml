@@ -6,8 +6,8 @@ spring:
     bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
     topic:
       orchestrator: orchestrator
-      produto-validacao-sucesso: produtos-validacao-sucesso
-      produto-validacao-falha: produtos-validacao-falha
+      produto-validacao-sucesso: produto-validacao-sucesso
+      produto-validacao-falha: produto-validacao-falha
     consumer:
       group-id: product-validation-group
       auto-offset-reset: latest
