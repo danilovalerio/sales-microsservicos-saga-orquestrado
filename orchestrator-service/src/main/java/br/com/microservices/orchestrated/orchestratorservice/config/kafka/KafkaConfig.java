@@ -1,6 +1,7 @@
 package br.com.microservices.orchestrated.orchestratorservice.config.kafka;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -8,15 +9,24 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.ETopics.*;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.ETopics.BASE_ORCHESTRATOR;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.ETopics.INICIA_SAGA;
+
 @EnableKafka
 @Configuration
 @RequiredArgsConstructor
 public class KafkaConfig {
+
+    private static final Integer PARTITION_COUNT = 1;
+    private static final Integer REPLICA_COUNT = 1;
+
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServer;
 
@@ -72,5 +82,68 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
+    }
+
+    private NewTopic buildTopic(String topicName) {
+        return TopicBuilder
+                .name(topicName)
+                .partitions(PARTITION_COUNT)
+                .replicas(REPLICA_COUNT)
+                .build();
+    }
+
+    @Bean
+    public NewTopic iniciaSagaTopic(){
+        return buildTopic(INICIA_SAGA.getTopic());
+    }
+
+    @Bean
+    public NewTopic orchestratorTopic(){
+        return buildTopic(BASE_ORCHESTRATOR.getTopic());
+    }
+
+    @Bean
+    public NewTopic fimSucessoTopic(){
+        return buildTopic(FIM_SUCESSO.getTopic());
+    }
+
+    @Bean
+    public NewTopic fimFalhaTopic(){
+        return buildTopic(FIM_FALHA.getTopic());
+    }
+
+    @Bean
+    public NewTopic produtoValidacaoSucessoTopic(){
+        return buildTopic(PRODUTO_VALIDACAO_SUCESSO.getTopic());
+    }
+
+    @Bean
+    public NewTopic produtoValidacaoFalhaTopic(){
+        return buildTopic(PRODUTO_VALIDACAO_FALHA.getTopic());
+    }
+
+    @Bean
+    public NewTopic pagamentoSucessoTopic(){
+        return buildTopic(PAGAMENTO_SUCESSO.getTopic());
+    }
+
+    @Bean
+    public NewTopic pagamentoFalhaTopic(){
+        return buildTopic(PAGAMENTO_FALHA.getTopic());
+    }
+
+    @Bean
+    public NewTopic inventarioSucessoTopic(){
+        return buildTopic(INVENTARIO_SUCESSO.getTopic());
+    }
+
+    @Bean
+    public NewTopic inventarioFalhaTopic(){
+        return buildTopic(INVENTARIO_FALHA.getTopic());
+    }
+
+    @Bean
+    public NewTopic finalizaSagaTopic(){
+        return buildTopic(FINALIZA_SAGA.getTopic());
     }
 }
