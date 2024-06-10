@@ -151,6 +151,24 @@ services:
     ports:
       - 8091:8091
 
+  inventory-service:
+    build: './inventory-service'
+    container_name: inventory-service
+    depends_on:
+      - inventory-db #pegar sempre pelo nome do serviço
+      - kafka
+    networks:
+      - orchestrator-saga
+    environment:
+      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - DB_HOST=invetory-db
+      - DB_NAME=invetory-db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    ports:
+      - 8092:8092
+
 networks:
   orchestrator-saga:
     driver: bridge
