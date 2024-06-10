@@ -19,3 +19,9 @@ spring:
   jpa:
     hibernate.ddl-auto: create-drop #toda vez que rodar destrói e cria do zero
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org:
+      apache:
+        kafka: OFF
