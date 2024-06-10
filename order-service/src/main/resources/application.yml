@@ -2,6 +2,14 @@ server:
   port: 3000
 
 spring:
+  kafka:
+    #url do nosso cluster
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    topic:
+      teste: teste
+    consumer:
+      group-id: order-group #grupo da nossa aplicacao para o topico
+      auto-offset-reset: latest #busca o offset mais recente se fosse earliest pegaria o offset mais antigo
 
   data:
     mongodb:
