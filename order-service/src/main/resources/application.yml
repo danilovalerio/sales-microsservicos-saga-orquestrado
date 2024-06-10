@@ -6,7 +6,8 @@ spring:
     #url do nosso cluster
     bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
     topic:
-      teste: teste
+      inicia-saga: inicia-saga
+      finaliza-saga: finaliza-saga
     consumer:
       group-id: order-group #grupo da nossa aplicacao para o topico
       auto-offset-reset: latest #busca o offset mais recente se fosse earliest pegaria o offset mais antigo
