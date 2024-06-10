@@ -111,7 +111,7 @@ services:
     networks:
       - orchestrator-saga
     environment:
-      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - KAFKA_BROKER=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
     ports:
       - 8080:8080
 
@@ -124,7 +124,7 @@ services:
     networks:
       - orchestrator-saga
     environment:
-      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - KAFKA_BROKER=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
       - DB_HOST=product-db
       - DB_NAME=product-db
       - DB_PORT=5432
@@ -142,7 +142,7 @@ services:
     networks:
       - orchestrator-saga
     environment:
-      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - KAFKA_BROKER=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
       - DB_HOST=payment-db
       - DB_NAME=payment-db
       - DB_PORT=5432
@@ -160,7 +160,7 @@ services:
     networks:
       - orchestrator-saga
     environment:
-      - KAFKA_BROKERS=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
+      - KAFKA_BROKER=kafka:29092 #PORTA INTERNAL DO CONTAINER KAKFA
       - DB_HOST=invetory-db
       - DB_NAME=invetory-db
       - DB_PORT=5432
