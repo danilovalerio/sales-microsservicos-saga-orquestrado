@@ -25,11 +25,11 @@ flowchart TB
   end
 
 
-  Order --> Orchestrator
+  Order <--> Orchestrator
   Order -.- OrderDB
-  Orchestrator --> ProductValidation
-  Orchestrator --> Payment
-  Orchestrator --> Inventory
+  Orchestrator <--> ProductValidation
+  Orchestrator <--> Payment
+  Orchestrator <--> Inventory
   ProductValidation -.- ProductValidationDB
   Payment -.- PaymentDB
   Inventory -.- InventoryDB
